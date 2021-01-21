@@ -5,11 +5,22 @@
  */
 package tela;
 
+import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import modellosUteis.CriarInternal;
+import medelos.Usuario;
 
 /**
  *
@@ -18,12 +29,23 @@ import modellosUteis.CriarInternal;
 public class Principal extends javax.swing.JFrame {
 
     CriarInternal criarInternal;
+    Timer timer;
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss");
 
     public Principal() {
         initComponents();
-       ImageIcon iconEmp=  new ImageIcon("src/images/growthcode.png");
-       iconEmp.setImage(iconEmp.getImage().getScaledInstance(596, 398, 1));
-       lblimagemLogoEmp.setIcon(iconEmp);
+        setLocationRelativeTo(null);
+
+        ImageIcon iconEmp = new ImageIcon("src/images/growthcode.png");
+        iconEmp.setImage(iconEmp.getImage().getScaledInstance(596, 398, 1));
+        lblimagemLogoEmp.setIcon(iconEmp);
+
+        UsuarioLogado.setText(Tela.userStatic.getNome());
+
+         atualizaHoras();
+       
+
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +58,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jTree2 = new javax.swing.JTree();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        UsuarioLogado = new javax.swing.JLabel();
+        HoraAtual = new javax.swing.JLabel();
         lblimagemLogoEmp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,15 +113,38 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText(" Usuario logado:");
+
+        UsuarioLogado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        HoraAtual.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(UsuarioLogado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(HoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 181, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(HoraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -122,7 +170,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addComponent(lblimagemLogoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(187, 187, 187))
         );
@@ -130,7 +178,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(lblimagemLogoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
         );
@@ -154,8 +202,8 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTree2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MousePressed
-       String nome = jTree2.getSelectionPath().getLastPathComponent().toString();
-        JOptionPane.showMessageDialog(null,nome);
+        String nome = jTree2.getSelectionPath().getLastPathComponent().toString();
+        JOptionPane.showMessageDialog(null, nome);
     }//GEN-LAST:event_jTree2MousePressed
 
     /**
@@ -193,7 +241,18 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
+    private void atualizaHoras() {
+        timer = new Timer(1000, (ActionEvent e) -> {
+            calendar.setTimeInMillis(calendar.getTimeInMillis() + 1000);
+             HoraAtual.setText(hora.format(calendar.getTime()));
+          
+        });
+        timer.start();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel HoraAtual;
+    private javax.swing.JLabel UsuarioLogado;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;

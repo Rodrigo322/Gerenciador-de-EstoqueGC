@@ -7,7 +7,7 @@ package tela;
 
 //import Repository.PedidosRepositorio;
 //import Manger.Factory;
-import QueryesPesonalizadas.QueryProduto;
+import QueryesPesonalizadas.Querys;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -696,9 +696,9 @@ public class VendasFrame extends javax.swing.JFrame {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Factory fac = new Factory();
-            QueryProduto q = new QueryProduto();
-            
-             clientep = q.QueryBuscarPorCPF(jtfCpfCliente.getText(), jpa);
+            Querys q = new Querys();
+
+            clientep = q.QueryBuscarPorCPF(jtfCpfCliente.getText(), jpa);
             //   EntityManager jpa = fac.retornaEntidadegerenciada();
 //            clientep = .find(Cliente.class, Integjpaer.parseInt(jtfCpfCliente.getText()));
             jtfCpfCliente.setText(clientep.getNome_cliente());
@@ -780,14 +780,12 @@ public class VendasFrame extends javax.swing.JFrame {
             PedidoProduto pedidoProduto = new PedidoProduto();
 
             criarPedidoProduto(pedido, pedidoProduto);
-            
-            
 
         }
     }
 
     public void atualizarestoque(int id_produto, int quantidade, EntityManager jpa) {
-        QueryProduto queryProduto = new QueryProduto();
+        Querys queryProduto = new Querys();
         queryProduto.QueryAtualizarEstoque(id_produto, quantidade, jpa);
     }
 
@@ -917,8 +915,6 @@ public class VendasFrame extends javax.swing.JFrame {
             jpa.clear();
 
         }
-        
-        
 
         DefaultTableModel model = (DefaultTableModel) JtableVenda1.getModel();
         for (int i = JtableVenda1.getRowCount() - 1; i >= 0; i--) {
@@ -927,7 +923,7 @@ public class VendasFrame extends javax.swing.JFrame {
 
         clientep = null;
         somarValoTotal();
-        
+
         CardLayout card = (CardLayout) painelAreaTrablaho.getLayout();
         card.show(painelAreaTrablaho, "principal");
     }

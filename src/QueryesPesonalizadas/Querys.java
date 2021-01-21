@@ -6,16 +6,18 @@
 package QueryesPesonalizadas;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import medelos.Cliente;
 import medelos.Produto;
+import medelos.Usuario;
 
 /**
  *
  * @author Pedro Henrique Gomes
  */
-public class QueryProduto {
+public class Querys {
 
     public void QueryAtualizarEstoque(int id_produto, int quantidade, EntityManager jpa) {
         Produto produto = new Produto();
@@ -29,11 +31,25 @@ public class QueryProduto {
         jpa.getTransaction().commit();
 
     }
-    
-    public Cliente QueryBuscarPorCPF(String CPF, EntityManager jpa){
+
+    public Cliente QueryBuscarPorCPF(String CPF, EntityManager jpa) {
         Query query = jpa.createQuery("SELECT c FROM Cliente c WHERE c.cpf_cliente = '" + CPF + "' ", Cliente.class);
-        
+
         Cliente cliente = (Cliente) query.getSingleResult();
         return cliente;
     }
+
+    public Usuario LoginUser(String nome, String senha, EntityManager jpa) {
+        try {
+            Query buscarUser = jpa.createQuery("SELECT u FROM Usuario u WHERE u.user = '" + nome + "' and u.senha ='" + senha + "'", Cliente.class);
+            Usuario usuario = (Usuario) buscarUser.getSingleResult();
+            return usuario;
+
+        } catch (NoResultException e) {
+            return null;
+
+        }
+
+    }
+
 }
