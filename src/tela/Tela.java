@@ -18,24 +18,22 @@ import static tela.Login.usuario;
  */
 public class Tela {
 
-    
-    
-    public static Usuario userStatic ;
+    public static Usuario userStatic;
     public static String usuario;
-    
-        public void logar(String nome, String senha, EntityManager jpa) {
+
+    public void logar(String nome, String senha, EntityManager jpa) {
         Querys loginUser = new Querys();
         userStatic = loginUser.LoginUser(nome, senha, jpa);
         if (userStatic != null) {
             JOptionPane.showMessageDialog(null, "Bem vindo: " + userStatic.getNome());
             Principal principal = new Principal();
             principal.setVisible(true);
-            
+
             usuario = userStatic.getNome();
         } else {
             JOptionPane.showMessageDialog(null, "User:   não encontrado");
             userStatic = null;
         }
     }
-    
+
 }
