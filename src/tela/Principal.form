@@ -126,7 +126,7 @@
                     <Component class="javax.swing.JTree" name="jTree2">
                       <Properties>
                         <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                          <TreeModel code="Opera&#xe7;&#xf5;es do Sistema &#xa; Cadastros&#xa;   Clientes&#xa;   Fornecedor(Em desenvolvimento)&#xa;   Produtos&#xa;   Usuarios&#xa; Gera&#xe7;ao de Pedidos&#xa;   Pedidos/Or&#xe7;amentos&#xa; Relatorios&#xa;   Em andamento...&#xa;  "/>
+                          <TreeModel code="Opera&#xe7;&#xf5;es do Sistema &#xa; Cadastros&#xa;   Clientes&#xa;   Fornecedor(Em desenvolvimento)&#xa;   Produtos&#xa;   Usuarios&#xa; Gera&#xe7;ao de Pedidos&#xa;   Pedidos/Or&#xe7;amentos&#xa; Relatorios&#xa;   Em andamento...&#xa; Vendas&#xa;   PDV  "/>
                         </Property>
                       </Properties>
                       <Events>
@@ -165,7 +165,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="UsuarioLogado" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>

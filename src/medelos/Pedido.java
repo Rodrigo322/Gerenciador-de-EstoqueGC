@@ -41,6 +41,14 @@ public class Pedido implements Serializable {
     @ManyToOne()
     @JoinColumn(name="pagamento_id")
     private Pagamento pagamento;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     private String descricao;
 
     public Cliente getCliente() {

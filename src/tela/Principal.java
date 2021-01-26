@@ -6,6 +6,7 @@
 package tela;
 
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -91,6 +94,10 @@ public class Principal extends javax.swing.JFrame {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Em andamento...");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Vendas");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("PDV");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
         jTree2.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -139,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
@@ -203,7 +210,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void jTree2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MousePressed
         String nome = jTree2.getSelectionPath().getLastPathComponent().toString();
-        JOptionPane.showMessageDialog(null, nome);
+        System.out.println(nome);
+        if(nome.equals("Usuarios")) {
+            CadastrarUsuario cadastroUsuario = new CadastrarUsuario();
+            cadastroUsuario.setVisible(true);
+        } 
+        if(nome.equals("PDV")) {
+            try {
+                VendasFrame vendasFrame = new VendasFrame();
+                vendasFrame.setVisible(true);
+                this.setVisible(false);
+            } catch (SQLException | ClassNotFoundException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        
+        
     }//GEN-LAST:event_jTree2MousePressed
 
     /**

@@ -8,24 +8,14 @@ package tela;
 //import Repository.PedidosRepositorio;
 //import Manger.Factory;
 import QueryesPesonalizadas.Querys;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dialog;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import medelos.Pedido;
 import medelos.Produto;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,26 +26,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.plaf.InternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import medelos.Cliente;
 import medelos.Conexao;
 import medelos.Factory;
 import medelos.Pagamento;
 import medelos.PedidoProduto;
-import medelos.Pedido_;
-import modellosUteis.CriarInternal;
-import sun.misc.FloatingDecimal;
 
 /**
  *
@@ -159,8 +139,9 @@ public class VendasFrame extends javax.swing.JFrame {
         itmCancelarVenda = new javax.swing.JMenuItem();
         itmFinalizarVenda = new javax.swing.JMenuItem();
         jtmSelecionarCliente = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 51));
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -534,6 +515,20 @@ public class VendasFrame extends javax.swing.JFrame {
         });
         jMenu2.add(jtmSelecionarCliente);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        jMenuItem1.setText("Voltar Para Home");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuItem1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jMenuItem1KeyPressed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -760,6 +755,17 @@ public class VendasFrame extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jListaPagamentosMousePressed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Principal pc = new Principal();
+        pc.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1KeyPressed
     public void FinalizarEtapaVenda() {
         Pedido pedido = new Pedido();
         if (pagamento != null) {
@@ -770,6 +776,7 @@ public class VendasFrame extends javax.swing.JFrame {
                 clientep = jpa.find(Cliente.class, 1);
             }
             pedido.setCliente(clientep);
+            pedido.setUsuario(Tela.userStatic);
             jpa.getTransaction().begin();
             jpa.persist(pedido);
             jpa.getTransaction().commit();
@@ -966,6 +973,7 @@ public class VendasFrame extends javax.swing.JFrame {
     private javax.swing.JList<String> jListaPagamentos;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

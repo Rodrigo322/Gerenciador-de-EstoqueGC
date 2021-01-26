@@ -9,7 +9,7 @@ import medelos.Pagamento;
 import medelos.PedidoProduto;
 import medelos.Usuario;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-01-20T23:55:29")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-01-26T00:31:40")
 @StaticMetamodel(Pedido.class)
 public class Pedido_ { 
 

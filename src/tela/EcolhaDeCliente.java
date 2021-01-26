@@ -5,40 +5,22 @@
  */
 package tela;
 
-import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
-import com.sun.xml.internal.org.jvnet.mimepull.CleanUpExecutorFactory;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-import javax.persistence.QueryTimeoutException;
-import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import medelos.Cliente;
 import medelos.Conexao;
 import medelos.Factory;
-import medelos.Pedido;
 import medelos.PedidoProduto;
 import medelos.Produto;
 import modellosUteis.PedidoCompleto;
-import org.eclipse.persistence.exceptions.CommunicationException;
-import org.eclipse.persistence.exceptions.DatabaseException;
-import org.eclipse.persistence.exceptions.PersistenceUnitLoadingException;
-import org.eclipse.persistence.exceptions.TransactionException;
-import org.omg.CORBA.COMM_FAILURE;
 
 /**
  *

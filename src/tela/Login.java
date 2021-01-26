@@ -26,7 +26,7 @@ public class Login extends javax.swing.JFrame {
     Factory factory = new Factory();
     EntityManager jpa = factory.retornaEntidadegerenciada();
     public static Usuario userStatic = null;
-    
+
     public static String usuario;
 
     public Login() {
@@ -147,10 +147,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtCancelarActionPerformed
 
     private void jbtEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtEntrarActionPerformed
-        // TODO add your handling code here:
-         Tela tela = new Tela();
-          
-          tela.logar(userInput.getText(), senhaInput.getText(), jpa);
+        Tela tela = new Tela();
+        tela.logar(userInput.getText(), senhaInput.getText(), jpa);
+        this.setVisible(false);
+
     }//GEN-LAST:event_jbtEntrarActionPerformed
 
     private void userInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userInputKeyPressed
@@ -163,18 +163,17 @@ public class Login extends javax.swing.JFrame {
     private void senhaInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_senhaInputKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-          Tela tela = new Tela();
-          
-          tela.logar(userInput.getText(), senhaInput.getText(), jpa);
+            Tela tela = new Tela();
+            tela.logar(userInput.getText(), senhaInput.getText(), jpa);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_senhaInputKeyPressed
 
     private void jbtEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbtEntrarKeyPressed
-        // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-              Tela tela = new Tela();
-          
-          tela.logar(userInput.getText(), senhaInput.getText(), jpa);
+            Tela tela = new Tela();
+            tela.logar(userInput.getText(), senhaInput.getText(), jpa);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jbtEntrarKeyPressed
 
@@ -197,7 +196,7 @@ public class Login extends javax.swing.JFrame {
             Principal principal = new Principal();
             principal.setVisible(true);
             this.setVisible(false);
-            
+
             usuario = userStatic.getNome();
         } else {
             JOptionPane.showMessageDialog(null, "User: " + userInput.getText() + " não encontrado");
